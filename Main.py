@@ -1,6 +1,7 @@
 import praw
 import IDandSecret
 from praw.models import MoreComments
+import time
 
 identity = IDandSecret.ClientID
 secretpass = IDandSecret.ClientSecret
@@ -8,7 +9,7 @@ botpassword = IDandSecret.MyPass
 
 def replymachine(text):
     if text == 'reply':
-        reply_text = "Hey ", usernames, " This guy got a knife inside Canada somehow! Do you want it?     ^^I'm ^^a ^^bot.      ^^PM ^^/u/UNLUCK3 ^^for ^^help, ^^or ^^to ^^add ^^yourself.  "
+        reply_text = 'Hey ', usernames, ' This guy got a knife inside Canada somehow! Do you want it?     ^^I\'m ^^a ^^bot.      ^^PM ^^/u/UNLUCK3 ^^for ^^help, ^^or ^^to ^^add ^^yourself.  '
         submission.reply(reply_text)
 
 reddit = praw.Reddit(user_agent='CanadaKnifeBot (by /u/UNLUCK3', client_id=identity, client_secret=secretpass, username='CanadaKnifeBot', password=botpassword)
@@ -39,3 +40,4 @@ for submission in subreddit.stream.submissions():
                 elif canadian_mentions in normalized_text:
                     replymachine('reply')
                     break
+            #time.sleep(300) commented for testing
