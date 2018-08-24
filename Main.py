@@ -6,20 +6,24 @@ import time
 identity = IDandSecret.ClientID
 secretpass = IDandSecret.ClientSecret
 botpassword = IDandSecret.MyPass
+usernames = ['/u/UNLUCK3', '/u/DiscreetBot']
+reply_text = 'Hey ', usernames, 'This guy got a knife inside Canada somehow! Do you want it?     ^^I\'m ^^a ^^bot.    ' \
+                                '  ^^PM ^^/u/UNLUCK3 ^^for ^^help, ^^or ^^to ^^add ^^yourself '
+time.sleep(500)  # for testing
 
 def replymachine(text):
     if text == 'reply':
-        reply_text = 'Hey ', usernames, ' This guy got a knife inside Canada somehow! Do you want it?     ^^I\'m ^^a ^^bot.      ^^PM ^^/u/UNLUCK3 ^^for ^^help, ^^or ^^to ^^add ^^yourself.  '
         submission.reply(reply_text)
 
-reddit = praw.Reddit(user_agent='CanadaKnifeBot (by /u/UNLUCK3', client_id=identity, client_secret=secretpass, username='CanadaKnifeBot', password=botpassword)
+
+reddit = praw.Reddit(user_agent='CanadaKnifeBot (by /u/UNLUCK3', client_id=identity, client_secret=secretpass,
+                     username='CanadaKnifeBot', password=botpassword)
 
 subreddit = reddit.subreddit('DiscreetTest')
 
 for submission in subreddit.stream.submissions():
 
     callings = ['canada', 'canadian', '🇨🇦']
-    usernames = ['/u/UNLUCK3', '/u/DiscreetBot']
     normalized_title = submission.title.lower()
     normalized_text = submission.selftext.lower()
     alreadydone = 0
@@ -29,10 +33,11 @@ for submission in subreddit.stream.submissions():
             continue
         if top_level_comment.body == reply_text:
             alreadydone = 1
-        else alreadydone = 0
+        else:
+            alreadydone = 0
         if alreadydone == 1:
             break
-        elif alreadydone = 0:
+        elif alreadydone == 0:
             for canadian_mentions in callings:
                 if canadian_mentions in normalized_title:
                     replymachine('reply')
@@ -40,4 +45,4 @@ for submission in subreddit.stream.submissions():
                 elif canadian_mentions in normalized_text:
                     replymachine('reply')
                     break
-            #time.sleep(300) commented for testing
+            time.sleep(300)
