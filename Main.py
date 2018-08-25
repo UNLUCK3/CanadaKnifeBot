@@ -40,8 +40,8 @@ def mainloop():
         normalized_text = submission.selftext.lower()
 
         while counter1 <= 99:
-            time.sleep(30) # change to a higher number when not testing
             if submission.id not in posts_replied_to:
+                time.sleep(30)
                 for canadian_mentions in callings:
                     if canadian_mentions in normalized_title:
                         submission.reply(reply_text)
